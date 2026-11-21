@@ -1,33 +1,16 @@
-# DouyinTV (Android TV 抖音客户端)
+# DouyinTV (纯原生接口 + Media3 ExoPlayer 版)
 
-参考 [BBLL](https://github.com/xiaye13579/BBLL) 的电视端左侧导轨交互范式与 [douyin-tv](https://github.com/ygtec-org/douyin-tv) 的 WebView + JS 遥控器桥接方案开发的 Android TV 抖音客户端，支持通过 **GitHub Actions** 云端自动编译 APK。
+专为 Android TV 打造的抖音客户端，**完全不使用 WebView**，采用原生 HTTP 接口解析 + **AndroidX Media3 ExoPlayer** 硬件解码播放，兼容老旧电视/盒子（Android 5.0+）。
 
-## 功能特性
+## 架构特点
 
-- **BBLL 风格左侧导轨**：推荐、精选、关注、热榜、扫码登录、设置，支持 TV 遥控器 D-pad 焦点高亮与沉浸全屏切换。
-- **遥控器原生操控**：
-  - `↑` / `↓`：切换上一个 / 下一个视频
-  - `←` / `→`：快退 / 快进 10 秒（焦点在左侧导轨时按 `→` 进入视频区）
-  - `OK` / `确认`：播放 / 暂停；**长按 OK** 或按 **菜单键** 打开设置面板
-  - `返回键`：退出全屏 → 页面后退 → 双击退出应用
-- **播完自动连播**：自动监听视频 `ended` 事件并切换下一条。
-- **Cookie 持久化与崩溃自恢复**：扫码登录后自动保存状态；低内存电视盒子 WebView 渲染进程被回收时自动重建恢复。
+- **零 WebView 依赖**：直接调用抖音 Web API（`tab/feed`、`channel/feed`、`follow/feed`、`general/search/single`），内置纯 Kotlin `XBogus` 签名与访客 `ttwid` 自动注册。
+- **原生 Media3 ExoPlayer**：通过 `OkHttpDataSource` 注入 `Referer` 与 `User-Agent` 直连 CDN 视频流，支持硬解与倍速播放。
+- **BBLL 风格 TV 交互**：左侧导航导轨 + 4 列视频封面网格（`Coil` 加载 + 焦点放大动画），全屏播放器支持遥控器 `↑/↓` 切视频、`←/→` 快进退 10 秒、`OK` 播放/暂停、`菜单键` 切换倍速。
+- **手机扫码导入 Cookie（局域网 8088 端口）**：当遇到风控或需要看「关注」列表时，在「凭据/设置」中用手机微信/浏览器扫描二维码，即可通过局域网网页将浏览器 Cookie 或自建解析代理地址发送到电视，无需遥控器打字。
 
-## GitHub Actions 云端编译 APK
+## GitHub Actions 云端编译
 
-1. 在 GitHub 新建仓库（例如 `DouyinTV`），将本项目全部文件推送到 `main` 分支：
-   ```bash
-   git init
-   git add .
-   git commit -m "init: DouyinTV Android TV project"
-   git branch -M main
-   git remote add origin https://github.com/你的用户名/DouyinTV.git
-   git push -u origin main
-   ```
-2. 进入仓库的 **Actions** 标签页，等待 `Build DouyinTV APK` 工作流运行完成。
-3. 在构建详情页底部的 **Artifacts** 中下载 `DouyinTV-debug-apk` 或 `DouyinTV-release-apk`（已内置调试签名，可直接安装到电视或盒子）。
-4. 如需自动生成 **Release**，推送 `v*` 标签即可：
-   ```bash
-   git tag v1.0.0
-   git push origin v1.0.0
-   ```
+1. 将本项目全部文件推送到你的 GitHub 仓库 `main` 分支。
+2. 打开仓库 **Actions** 页面，等待 `Build DouyinTV Native APK` 完成。
+3. 在构建详情页 **Artifacts** 中下载 `DouyinTV-Native-debug-apk` 或 `DouyinTV-Native-release-apk` 安装到电视。

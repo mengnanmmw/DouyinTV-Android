@@ -5,22 +5,25 @@ import android.content.SharedPreferences
 
 class Prefs(context: Context) {
     private val prefs: SharedPreferences =
-        context.getSharedPreferences("douyintv_prefs", Context.MODE_PRIVATE)
+        context.getSharedPreferences("douyintv_native_prefs", Context.MODE_PRIVATE)
+
+    var cookie: String
+        get() = prefs.getString("cookie", "") ?: ""
+        set(value) = prefs.edit().putString("cookie", value.trim()).apply()
+
+    var ttwid: String
+        get() = prefs.getString("ttwid", "") ?: ""
+        set(value) = prefs.edit().putString("ttwid", value.trim()).apply()
+
+    var proxyBaseUrl: String
+        get() = prefs.getString("proxy_base_url", "") ?: ""
+        set(value) = prefs.edit().putString("proxy_base_url", value.trim().trimEnd('/')).apply()
 
     var autoPlayNext: Boolean
         get() = prefs.getBoolean("auto_play_next", true)
         set(value) = prefs.edit().putBoolean("auto_play_next", value).apply()
 
-    var compatMobileUa: Boolean
-        get() = prefs.getBoolean("compat_mobile_ua", false)
-        set(value) = prefs.edit().putBoolean("compat_mobile_ua", value).apply()
-
-    // 0 = Auto, 1 = Landscape, 2 = Portrait
-    var orientationMode: Int
-        get() = prefs.getInt("orientation_mode", 0)
-        set(value) = prefs.edit().putInt("orientation_mode", value).apply()
-
-    var sidebarVisible: Boolean
-        get() = prefs.getBoolean("sidebar_visible", true)
-        set(value) = prefs.edit().putBoolean("sidebar_visible", value).apply()
+    var loopSingle: Boolean
+        get() = prefs.getBoolean("loop_single", false)
+        set(value) = prefs.edit().putBoolean("loop_single", value).apply()
 }

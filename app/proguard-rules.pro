@@ -1,4 +1,2 @@
-# Keep JavascriptInterface methods
--keepclassmembers class * {
-    @android.webkit.JavascriptInterface <methods>;
-}
+-keep class com.douyintv.app.model.** { *; }
+-dontwarn okhttp3.**

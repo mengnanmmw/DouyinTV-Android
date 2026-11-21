@@ -4,28 +4,26 @@
     android:layout_height="match_parent"
     android:background="@color/bg_dark">
 
-    <!-- Main Horizontal Split: BBLL-style Left Rail + Douyin Stage -->
     <LinearLayout
-        android:id="@+id/mainContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <!-- Left Navigation Rail -->
+        <!-- BBLL-style Left Sidebar Rail -->
         <LinearLayout
             android:id="@+id/sidebarLayout"
-            android:layout_width="132dp"
+            android:layout_width="136dp"
             android:layout_height="match_parent"
             android:background="@color/bg_sidebar"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingHorizontal="12dp"
-            android:paddingVertical="20dp">
+            android:paddingVertical="22dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="22dp"
                 android:text="@string/app_name"
                 android:textColor="@color/brand_red"
                 android:textSize="20sp"
@@ -43,13 +41,13 @@
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/btnDiscover"
+                android:id="@+id/btnHot"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bg_sidebar_item"
                 android:focusable="true"
-                android:text="@string/nav_discover"
+                android:text="@string/nav_hot"
                 android:textColor="@color/text_primary"
                 android:textSize="15sp" />
 
@@ -65,13 +63,13 @@
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/btnHot"
+                android:id="@+id/btnSearch"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bg_sidebar_item"
                 android:focusable="true"
-                android:text="@string/nav_hot"
+                android:text="@string/nav_search"
                 android:textColor="@color/text_primary"
                 android:textSize="15sp" />
 
@@ -81,76 +79,106 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnAuthSettings"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
-                android:layout_marginBottom="10dp"
                 android:background="@drawable/bg_sidebar_item"
                 android:focusable="true"
-                android:text="@string/nav_login"
+                android:text="@string/nav_auth"
                 android:textColor="@color/brand_cyan"
-                android:textSize="15sp" />
-
-            <Button
-                android:id="@+id/btnSettings"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:background="@drawable/bg_sidebar_item"
-                android:focusable="true"
-                android:text="@string/nav_settings"
-                android:textColor="@color/text_primary"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
-        <!-- Video / Web Stage -->
-        <FrameLayout
-            android:id="@+id/webContainer"
+        <!-- Right Content Stage -->
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="16dp">
 
-            <WebView
-                android:id="@+id/webView"
+            <!-- Header Bar -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_gravity="top"
-                android:max="100"
-                android:progressTint="@color/brand_red"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/toastBanner"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_marginBottom="24dp"
-                android:background="#B3000000"
-                android:paddingHorizontal="18dp"
-                android:paddingVertical="8dp"
-                android:text="@string/hint_remote"
-                android:textColor="@color/text_primary"
-                android:textSize="13sp"
-                android:visibility="gone" />
-        </FrameLayout>
+                android:layout_marginBottom="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSectionTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="推荐视频"
+                    android:textColor="@color/text_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="240dp"
+                    android:layout_height="38dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_menu_item"
+                    android:hint="输入关键词回车搜索"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:paddingHorizontal="12dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btnRefreshFeed"
+                    android:layout_width="88dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/bg_menu_item"
+                    android:focusable="true"
+                    android:text="刷新"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Video Grid -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvVideos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingBottom="24dp" />
+
+                <ProgressBar
+                    android:id="@+id/progressLoading"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/brand_red"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvEmptyState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="24dp"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- Fullscreen HTML5 Video Container -->
-    <FrameLayout
-        android:id="@+id/fullscreenContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000000"
-        android:visibility="gone" />
-
-    <!-- TV Settings Overlay -->
+    <!-- Auth & Settings Overlay (Wi-Fi QR Cookie Import + Backend Proxy + Player Options) -->
     <FrameLayout
         android:id="@+id/settingsOverlay"
         android:layout_width="match_parent"
@@ -159,99 +187,111 @@
         android:visibility="gone">
 
         <LinearLayout
-            android:layout_width="420dp"
+            android:layout_width="680dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/bg_sidebar"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="24dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Left: QR Code for Phone Cookie/Proxy Import -->
+            <LinearLayout
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="DouyinTV 设置"
-                android:textColor="@color/text_primary"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_marginEnd="24dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnToggleSidebar"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_menu_item"
-                android:focusable="true"
-                android:text="隐藏左侧导航栏 (沉浸模式)"
-                android:textColor="@color/text_primary" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="手机扫码导入 Cookie"
+                    android:textColor="@color/brand_cyan"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnAutoPlayNext"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_menu_item"
-                android:focusable="true"
-                android:text="播完自动切下一个: 开启"
-                android:textColor="@color/text_primary" />
+                <ImageView
+                    android:id="@+id/ivQrCode"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:background="#FFFFFF"
+                    android:contentDescription="QR Code"
+                    android:padding="8dp" />
 
-            <Button
-                android:id="@+id/btnOrientation"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_menu_item"
-                android:focusable="true"
-                android:text="画面方向: 自动"
-                android:textColor="@color/text_primary" />
+                <TextView
+                    android:id="@+id/tvServerUrl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/btnCompatMode"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_menu_item"
-                android:focusable="true"
-                android:text="兼容模式 (手机版UA): 关闭"
-                android:textColor="@color/text_primary" />
-
-            <Button
-                android:id="@+id/btnRefresh"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_menu_item"
-                android:focusable="true"
-                android:text="刷新当前页面"
-                android:textColor="@color/text_primary" />
-
-            <Button
-                android:id="@+id/btnClearCache"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_menu_item"
-                android:focusable="true"
-                android:text="清除缓存并退出登录"
-                android:textColor="@color/brand_red" />
-
-            <Button
-                android:id="@+id/btnCloseSettings"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:background="@drawable/bg_menu_item"
-                android:focusable="true"
-                android:text="关闭菜单"
-                android:textColor="@color/text_secondary" />
-
-            <TextView
-                android:id="@+id/tvWebViewVersion"
-                android:layout_width="match_parent"
+            <!-- Right: Native Controls -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:gravity="center"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="接口与播放设置 (纯原生无WebView)"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCookieStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/btnAutoNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_menu_item"
+                    android:focusable="true"
+                    android:text="播完自动连播下一个: 开启"
+                    android:textColor="@color/text_primary" />
+
+                <Button
+                    android:id="@+id/btnLoopSingle"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_menu_item"
+                    android:focusable="true"
+                    android:text="单视频循环: 关闭"
+                    android:textColor="@color/text_primary" />
+
+                <Button
+                    android:id="@+id/btnClearCookie"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_menu_item"
+                    android:focusable="true"
+                    android:text="清除本地 Cookie 与代理配置"
+                    android:textColor="@color/brand_red" />
+
+                <Button
+                    android:id="@+id/btnCloseSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_menu_item"
+                    android:focusable="true"
+                    android:text="关闭并返回"
+                    android:textColor="@color/text_secondary" />
+            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 
