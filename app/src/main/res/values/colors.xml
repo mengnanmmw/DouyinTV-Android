@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_dark">#121216</color>
+    <color name="bg_sidebar">#1A1B20</color>
+    <color name="bg_card">#25262E</color>
+    <color name="brand_red">#FE2C55</color>
+    <color name="brand_cyan">#25F4EE</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#A8AAB3</color>
+    <color name="focus_stroke">#FE2C55</color>
+    <color name="overlay_dim">#CC0E0F14</color>
+</resources>
